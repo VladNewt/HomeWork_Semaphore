@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.concurrent.CyclicBarrier;
 
 public class Main {
+    private static CyclicBarrier barrier = new CyclicBarrier(3, new Broken());
     public static void main(String[] args) {
         Random rnd = new Random();
 
@@ -15,8 +16,9 @@ public class Main {
             System.out.println("array["+i+"] = " + array[i]);
         }
 
+
         for (int i = 0; i < array.length; i++) {
-            new BarierThread("Th"+i, i, rnd.nextLong(1000),new CyclicBarrier(3),array).start();
+            new BarierThread("Th"+i, i, rnd.nextLong(10000),barrier,array).start();
         }
 
 
